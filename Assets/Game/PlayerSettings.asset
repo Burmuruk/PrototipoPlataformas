@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe731887762c4904dbd8188931432105, type: 3}
+  m_Name: PlayerSettings
+  m_EditorClassIdentifier: 
+  tagsToAvoid:
+  - Platform
+  gravity: 3
+  speed: 2.5
+  jumpForce: 9
+  doubleJumpForce: 0.01
+  jumpCoolDown: 1
+  doubleJumpCoolDown: 1
+  groundDistance: 1.93
+  groundSize: 2
+  coyoteTime: 1
+  wallDistance: 0.46
+  wallSize: 1
+  jumpSize: 0.1
+  dashOffset: 0.1
+  dashDistance: 2
+  dashSpeed: 10
+  dashTime: 0.6
+  dashCoolDown: 1
+  audios: []
