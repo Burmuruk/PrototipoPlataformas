@@ -152,7 +152,7 @@ namespace Xolito.Movement
 
             float angle = Get_Angle(Destiny.normalized);
             bool founded = false;
-            hit2D = Physics2D.BoxCastAll(startPosition, newSize, angle, finalPosition, Destiny.magnitude);
+            hit2D = Physics2D.BoxCastAll(startPosition, newSize, angle, finalPosition.normalized, Destiny.magnitude);
 
             (float? nearestDistance, GameObject item) result = default;
 
@@ -169,6 +169,10 @@ namespace Xolito.Movement
                             result.nearestDistance = nd;
                             result.item = hit.transform.gameObject;
                         }
+                        else
+                        {
+                            print("Wrong distance");
+                        }
                     }
                     #region Debug
                     //if (gameObject.name.Contains("lanco"))
@@ -182,6 +186,10 @@ namespace Xolito.Movement
                     //} 
                     #endregion
                 }
+            }
+            else
+            {
+                print("nothing");
             }
 
             return result;
@@ -197,19 +205,22 @@ namespace Xolito.Movement
                 //    //Debug.DrawLine(boxCollider.bounds.min, Vector3.up * 2, Color.blue);
                 //}
                 //print(Destiny.normalized.y);
+                Vector2 pos = boxCollider.transform.position;
+                Vector2 hitPos = hit.collider.transform.position;
+
                 return Destiny.normalized switch
                 {
-                    { x: -1 } when (hit.collider.bounds.max.x <= boxCollider.bounds.min.x) =>
-                        boxCollider.bounds.min.x - hit.collider.bounds.max.x,
+                    { x: -1 } when (hitPos.x + hit.collider.bounds.max.x <= pos.x + boxCollider.bounds.min.x) =>
+                        (pos.x + boxCollider.bounds.min.x) - (hitPos.x + hit.collider.bounds.max.x),
 
-                    { x: 1 } when (hit.collider.bounds.min.x >= boxCollider.bounds.max.x) =>
-                        hit.collider.bounds.min.x - boxCollider.bounds.max.x,
+                    { x: 1 } when (hitPos.x + hit.collider.bounds.min.x >= pos.x + boxCollider.bounds.max.x) =>
+                        (hitPos.x + hit.collider.bounds.min.x) - (pos.x + boxCollider.bounds.max.x),
 
-                    { y: -1 } when (hit.collider.bounds.max.y <= boxCollider.bounds.min.y) =>
-                        boxCollider.bounds.min.y - hit.collider.bounds.max.y,
+                    { y: -1 } when (hitPos.y + hit.collider.bounds.max.y <= pos.y + boxCollider.bounds.min.y) =>
+                        (boxCollider.bounds.min.y) - ( hit.collider.bounds.max.y),
 
-                    { y: 1 } when (hit.collider.bounds.min.y >= boxCollider.bounds.max.y) =>
-                        hit.collider.bounds.min.y - boxCollider.bounds.max.y,
+                    { y: 1 } when (hitPos.y + hit.collider.bounds.min.y >= pos.y + boxCollider.bounds.max.y) =>
+                        ( hit.collider.bounds.min.y) - ( boxCollider.bounds.max.y),
 
                     _ => null,
                 };
@@ -359,7 +370,7 @@ namespace Xolito.Movement
             dashVelocity = default;
             inDash = false;
 
-            this.GetComponent<Animator>().SetBool("isDashing", false);
+            //this.GetComponent<Animator>().SetBool("isDashing", false);
             Clear_XVelocity();
             FreezeVerticalPosition(false);
             yield break;

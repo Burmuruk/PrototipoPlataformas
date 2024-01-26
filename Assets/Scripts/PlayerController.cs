@@ -47,7 +47,7 @@ namespace Xolito.Control
                 if(direction != 0)
                 {
                     //Debug.Log("Direction " + direction);
-                    animatorXolos.SetBool("isMoving", true);
+                    //animatorXolos.SetBool("isMoving", true);
                     ChangeSpriteOrientation(direction);
                 }
 

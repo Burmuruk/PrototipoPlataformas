@@ -15,14 +15,14 @@ MonoBehaviour:
   tagsToAvoid:
   - Platform
   gravity: 3
-  speed: 5
-  jumpForce: 8
+  speed: 2.5
+  jumpForce: 9
   jumpCoolDown: 1
-  groundDistance: 1.83
-  groundSize: 0.3
+  groundDistance: 1.93
+  groundSize: 2
   coyoteTime: 1
-  wallDistance: 0.3
-  wallSize: 0.4
+  wallDistance: 0.46
+  wallSize: 1
   jumpSize: 0.1
   dashOffset: 0.1
   dashDistance: 2
