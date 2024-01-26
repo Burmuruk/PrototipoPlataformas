@@ -40,6 +40,7 @@ namespace Xolito.Control
         [SerializeField] float speed = 5;
         [SerializeField] float jumpForce = 5;
         [SerializeField] float doubleJumpForce = 5;
+        [SerializeField] int maxJumps = 2;
         [SerializeField] float jumpCoolDown = 1f;
         [SerializeField] float doubleJumpCoolDown = 1f;
 
@@ -78,6 +79,7 @@ namespace Xolito.Control
         public float Speed { get => speed; }
         public float JumpForce { get => jumpForce; }
         public float DoubleJumpForce { get => jumpForce; }
+        public int MaxJumps { get => maxJumps; }
         public float JumpCoolDown { get => jumpCoolDown; }
         public float DoubleJumpCoolDown { get => jumpCoolDown; }
         public List<string> TagsToAvoid { get => tagsToAvoid; }

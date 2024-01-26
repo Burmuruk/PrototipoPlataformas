@@ -72,11 +72,11 @@ namespace Xolito.Control
 
         public void Dash()
         {
-            if (mover.InteractWithDash())
-            {
-                animatorXolos.SetBool("isDashing", true);
-                //source.PlayOneShot(pSettings.Get_Audio(BasicActions.Dash));
-            }
+            //if (mover.InteractWithDash())
+            //{
+            //    animatorXolos.SetBool("isDashing", true);
+            //    //source.PlayOneShot(pSettings.Get_Audio(BasicActions.Dash));
+            //}
         }
 
         public void Jump()

@@ -21,6 +21,7 @@ namespace Xolito.Movement
         [SerializeField] private bool inDash = false;
         [SerializeField] private bool isGrounded = false;
         [SerializeField] private bool canJump = true;
+        [SerializeField] private int jumpsCount = 0;
         [SerializeField] private bool canDash = false;
         [SerializeField] private bool isBesidePlatform = false;
         [SerializeField] private bool isTouchingTheWall = false;
@@ -81,7 +82,7 @@ namespace Xolito.Movement
 
         public bool InteractWith_Movement(float direction)
         {
-            if (inDash) return false;
+            if (inDash || !cdDoubleJump.CanUse) return false;
 
             if (!wallDetection.isTouchingWall || ((direction >= 0 && !wallDetection.isAtRight) || direction < 0 && wallDetection.isAtRight))
             {
@@ -104,14 +105,19 @@ namespace Xolito.Movement
                 JumpTo(new Vector2(isWallRight ? -1 : 1, 1));
 
                 StartCoroutine(cdDoubleJump.CoolDown());
+
+                return true;
             }
 
-            if (!isGrounded || inDash || !cdJump.CanUse) return false;
+            if (inDash || !cdJump.CanUse || jumpsCount >= pSettings.MaxJumps) return false;
+
+            if ((isGrounded && jumpsCount > 0) || (!isGrounded && jumpsCount < 1)) return false;
 
             (float ? distance, GameObject item) = Get_DistanceToMove(Vector2.up, pSettings.JumpSize);
 
             if (!distance.HasValue)
             {
+                jumpsCount++;
                 Move_Gravity();
                 Jump();
 
@@ -283,7 +289,12 @@ namespace Xolito.Movement
                     groundToLand.isTrigger = false;
                 }
 
-                if (distance < .1f) isGrounded = true;
+                if (distance < .1f)
+                {
+                    isGrounded = true;
+                    if (cdJump.CanUse)
+                        jumpsCount = 0;
+                }
                 else isGrounded = false;
             }
             else if (groundToLand != null)

@@ -15,10 +15,11 @@ MonoBehaviour:
   tagsToAvoid:
   - Platform
   gravity: 3
-  speed: 2.5
+  speed: 5
   jumpForce: 9
   doubleJumpForce: 0.01
-  jumpCoolDown: 1
+  maxJumps: 2
+  jumpCoolDown: 0.5
   doubleJumpCoolDown: 1
   groundDistance: 1.93
   groundSize: 2
