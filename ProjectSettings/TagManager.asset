@@ -12,8 +12,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Dirt
+  - Grass
   - 
   - 
   - 
@@ -41,4 +41,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Cascade
+    uniqueID: 2560629887
+    locked: 0
+  - name: Background
+    uniqueID: 331807241
+    locked: 0
+  - name: Dirt
+    uniqueID: 2288166129
+    locked: 0
+  - name: Grass
+    uniqueID: 941623935
     locked: 0
