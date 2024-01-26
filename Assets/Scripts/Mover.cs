@@ -31,6 +31,7 @@ namespace Xolito.Movement
         BoxCollider2D boxCollider;
         BoxCollider2D colliderToAvoid = default;
         CoolDownAction cdJump;
+        CoolDownAction cdDoubleJump;
         CoolDownAction cdDash;
         CoolDownAction cdCoyote;
 
@@ -65,6 +66,7 @@ namespace Xolito.Movement
             canDash = true;
 
             cdJump = new CoolDownAction(pSettings.JumpCoolDown, Set_CanJump);
+            cdDoubleJump = new CoolDownAction(pSettings.JumpCoolDown, Set_CanJump);
             cdDash = new CoolDownAction(pSettings.DashCoolDown);
             cdCoyote = new CoolDownAction(pSettings.CoyoteTime, Fall);
         }
@@ -96,6 +98,14 @@ namespace Xolito.Movement
 
         public bool InteractWith_Jump()
         {
+            if (isTouchingTheWall && !isGrounded && !inDash && cdDoubleJump.CanUse)
+            {
+                Move_Gravity();
+                JumpTo(new Vector2(isWallRight ? -1 : 1, 1));
+
+                StartCoroutine(cdDoubleJump.CoolDown());
+            }
+
             if (!isGrounded || inDash || !cdJump.CanUse) return false;
 
             (float ? distance, GameObject item) = Get_DistanceToMove(Vector2.up, pSettings.JumpSize);
@@ -321,6 +331,12 @@ namespace Xolito.Movement
         }
 
         private void Jump() => rgb2d.velocity = new Vector2(rgb2d.velocity.x, pSettings.JumpForce);
+
+        private void JumpTo(Vector3 dir)
+        {
+            rgb2d.velocity = Vector3.zero;
+            rgb2d.AddForce(new Vector2(dir.x, dir.y) * pSettings.DoubleJumpForce, ForceMode2D.Impulse);
+        }
 
         private void Clear_XVelocity() => rgb2d.velocity = new Vector2(0, rgb2d.velocity.y);
 

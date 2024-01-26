@@ -17,7 +17,9 @@ MonoBehaviour:
   gravity: 3
   speed: 2.5
   jumpForce: 9
+  doubleJumpForce: 0.01
   jumpCoolDown: 1
+  doubleJumpCoolDown: 1
   groundDistance: 1.93
   groundSize: 2
   coyoteTime: 1
