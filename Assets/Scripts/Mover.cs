@@ -86,8 +86,19 @@ namespace Xolito.Movement
 
             if (!wallDetection.isTouchingWall || ((direction >= 0 && !wallDetection.isAtRight) || direction < 0 && wallDetection.isAtRight))
             {
-                transform.Translate(direction * pSettings.Speed * Time.deltaTime, 0, 0);
-                currentDirection.x = direction > 0 ? 1 : -1;
+                if (jumpsCount == 0)
+                {
+                    rgb2d.totalForce = Vector2.zero;
+                    transform.Translate(direction * pSettings.Speed * Time.deltaTime, 0, 0);
+                    currentDirection.x = direction > 0 ? 1 : -1;
+                }
+                else
+                {
+                    //rgb2d.AddForce( Vector2.right * direction * pSettings.Speed);
+
+                    rgb2d.velocity = new Vector2(rgb2d.velocity.x + direction * pSettings.Speed * Time.deltaTime, rgb2d.velocity.y);
+                    //rgb2d.AddForce(Vector2.right * direction * (pSettings.Speed / 2 * Time.deltaTime), ForceMode2D.Force);
+                }
             }
             else
             {
@@ -226,6 +237,23 @@ namespace Xolito.Movement
 
                 return Destiny.normalized switch
                 {
+                    { x: -1 } when (hit.point.x <= boxCollider.bounds.min.x) =>
+                        (boxCollider.bounds.min.x) - (hit.point.x),
+
+                    { x: 1 } when (hit.point.x >= boxCollider.bounds.max.x) =>
+                        (hit.point.x) - (boxCollider.bounds.max.x),
+
+                    { y: -1 } when (hit.point.y <= boxCollider.bounds.min.y) =>
+                        (boxCollider.bounds.min.y) - (hit.point.y),
+
+                    { y: 1 } when (hit.point.y >= boxCollider.bounds.max.y) =>
+                        (hit.point.y) - (boxCollider.bounds.max.y),
+
+                    _ => null,
+                };
+
+                return Destiny.normalized switch
+                {
                     { x: -1 } when (hitPos.x + hit.collider.bounds.max.x <= pos.x + boxCollider.bounds.min.x) =>
                         (pos.x + boxCollider.bounds.min.x) - (hitPos.x + hit.collider.bounds.max.x),
 
@@ -346,6 +374,7 @@ namespace Xolito.Movement
         private void JumpTo(Vector3 dir)
         {
             rgb2d.velocity = Vector3.zero;
+            rgb2d.totalForce = Vector2.zero;
             rgb2d.AddForce(new Vector2(dir.x, dir.y) * pSettings.DoubleJumpForce, ForceMode2D.Impulse);
         }
 
