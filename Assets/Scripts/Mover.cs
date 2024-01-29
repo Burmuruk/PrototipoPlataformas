@@ -86,18 +86,15 @@ namespace Xolito.Movement
 
             if (!wallDetection.isTouchingWall || ((direction >= 0 && !wallDetection.isAtRight) || direction < 0 && wallDetection.isAtRight))
             {
-                if (jumpsCount == 0)
-                {
-                    rgb2d.totalForce = Vector2.zero;
-                    transform.Translate(direction * pSettings.Speed * Time.deltaTime, 0, 0);
-                    currentDirection.x = direction > 0 ? 1 : -1;
-                }
-                else
-                {
-                    //rgb2d.AddForce( Vector2.right * direction * pSettings.Speed);
+                transform.Translate(direction * pSettings.Speed * Time.deltaTime, 0, 0);
+                currentDirection.x = direction > 0 ? 1 : -1;
 
-                    rgb2d.velocity = new Vector2(rgb2d.velocity.x + direction * pSettings.Speed * Time.deltaTime, rgb2d.velocity.y);
-                    //rgb2d.AddForce(Vector2.right * direction * (pSettings.Speed / 2 * Time.deltaTime), ForceMode2D.Force);
+                if (rgb2d.velocity.x != 0)
+                {
+                    if (rgb2d.velocity.magnitude > .05f)
+                        rgb2d.velocity += Vector2.right * currentDirection.x * Time.deltaTime * 2;
+                    else
+                        rgb2d.velocity = Vector2.zero;
                 }
             }
             else
@@ -375,7 +372,8 @@ namespace Xolito.Movement
         {
             rgb2d.velocity = Vector3.zero;
             rgb2d.totalForce = Vector2.zero;
-            rgb2d.AddForce(new Vector2(dir.x, dir.y) * pSettings.DoubleJumpForce, ForceMode2D.Impulse);
+            rgb2d.velocity = dir * pSettings.DoubleJumpForce;
+            //rgb2d.AddForce(new Vector2(dir.x, dir.y) * pSettings.DoubleJumpForce / 2, ForceMode2D.Impulse);
         }
 
         private void Clear_XVelocity() => rgb2d.velocity = new Vector2(0, rgb2d.velocity.y);

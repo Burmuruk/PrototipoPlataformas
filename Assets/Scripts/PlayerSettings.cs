@@ -78,7 +78,7 @@ namespace Xolito.Control
         public float Gravity { get => gravity * Time.deltaTime; }
         public float Speed { get => speed; }
         public float JumpForce { get => jumpForce; }
-        public float DoubleJumpForce { get => jumpForce; }
+        public float DoubleJumpForce { get => doubleJumpForce; }
         public int MaxJumps { get => maxJumps; }
         public float JumpCoolDown { get => jumpCoolDown; }
         public float DoubleJumpCoolDown { get => jumpCoolDown; }
