@@ -17,13 +17,14 @@ MonoBehaviour:
   gravity: 3
   speed: 2.5
   jumpForce: 7.5
-  doubleJumpForce: 0.1
-  jumpCoolDown: 1
-  doubleJumpCoolDown: 1
-  groundDistance: 0.35
+  doubleJumpForce: 7
+  maxJumps: 2
+  jumpCoolDown: 0.2
+  doubleJumpCoolDown: 0.2
+  groundDistance: 0.66
   groundSize: 1
   coyoteTime: 1
-  wallDistance: 0.35
+  wallDistance: 0.59
   wallSize: 1
   jumpSize: 0.1
   dashOffset: 0.1
