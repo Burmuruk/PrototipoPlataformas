@@ -3,17 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Platform
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Obstacles
   - Water
   - UI
-  - Dirt
-  - Grass
   - 
   - 
   - 
@@ -28,7 +25,9 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Layer 1
+  - Layer 2
+  - Layer 3
   - 
   - 
   - 
@@ -42,15 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Cascade
-    uniqueID: 2560629887
+  - name: Layer 1
+    uniqueID: 2425651459
     locked: 0
-  - name: Background
-    uniqueID: 331807241
+  - name: Layer 2
+    uniqueID: 4250941897
     locked: 0
-  - name: Dirt
-    uniqueID: 2288166129
-    locked: 0
-  - name: Grass
-    uniqueID: 941623935
+  - name: Layer 3
+    uniqueID: 4189426099
     locked: 0
