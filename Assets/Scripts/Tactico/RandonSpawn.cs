@@ -5,26 +5,26 @@ using UnityEngine;
 public class RandonSpawn : MonoBehaviour
 {
     [SerializeField]
-    private GameObject swarmerPrefab;
+    private GameObject roca;
     [SerializeField]
-    private GameObject bigSwarmerPrefab;
+    private GameObject diamante;
 
     [SerializeField]
-    private float swarmerInterval = 3.5f;
+    private float spawnTimeRoca = 3.5f;
     [SerializeField]
-    private float bigSwarmerInterval = 10f;
+    private float spawnTimeDiamante = 10f;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(spawnEnemy(swarmerInterval, swarmerPrefab));
-        StartCoroutine(spawnEnemy(bigSwarmerInterval, bigSwarmerPrefab));
+        StartCoroutine(spawnEnemy(spawnTimeRoca, roca));
+        StartCoroutine(spawnEnemy(spawnTimeDiamante, diamante));
     }
 
-    private IEnumerator spawnEnemy(float interval, GameObject enemy)
+    private IEnumerator spawnEnemy(float interval, GameObject roca)
     {
         yield return new WaitForSeconds(interval);
-        GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(-5f, 5), Random.Range(-6f, 6f), 0), Quaternion.identity);
-        StartCoroutine(spawnEnemy(interval, enemy));
+        GameObject newRoca = Instantiate(roca, new Vector3(Random.Range(-5f, 5), Random.Range(-6f, 6f), 0), Quaternion.identity);
+        StartCoroutine(spawnEnemy(interval, roca));
     }
 }
