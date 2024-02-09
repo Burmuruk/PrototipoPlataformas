@@ -6,13 +6,11 @@ using UnityEngine;
 
 public class PickSystem : MonoBehaviour
 {
-    [Header("Settings")]
-    [SerializeField] int materialsLayer = 21;
-    [SerializeField] Vector2 detectionSize = Vector2.one;
+    [Header("Settings"), Space()]
+    [SerializeField] int maxExperience = 1000;
     [Space(), Header("Status")]
     [SerializeField] int curLevel = 0;
     [SerializeField] int experience = 0;
-    [SerializeField] int maxExperience = 1000;
 
     public event Action OnlevelUp;
 
@@ -22,6 +20,11 @@ public class PickSystem : MonoBehaviour
         {
             return maxExperience;
         }
+    }
+
+    private void Start()
+    {
+        OnlevelUp += () => print("Leveled to " + curLevel);
     }
 
     private void Update()
@@ -61,6 +64,7 @@ public class PickSystem : MonoBehaviour
     private void LevelUp()
     {
         curLevel++;
+        OnlevelUp.Invoke();
     }
 
     private void IncreaseExperience(int exp)
