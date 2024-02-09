@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 11728750}
   - component: {fileID: 11728749}
   - component: {fileID: 11728748}
+  - component: {fileID: 11728751}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -294,6 +295,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11728751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11728747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5bdaab171c2fb44bdf52d8537bb640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roca: {fileID: 4136309960313342206, guid: 3123a165241868547bbbb84b75bdf5b6, type: 3}
+  diamante: {fileID: 8398437868347839198, guid: 2fc18080bad1ce64cbd728888dceb189,
+    type: 3}
+  obsidiana: {fileID: 1364091442923390440, guid: a4b72df609034174b85b926029151fcc,
+    type: 3}
+  lava: {fileID: 8385612661733724925, guid: e93a8f3f491b17643be16492aa791e34, type: 3}
+  spawnTimeRoca: 3.5
+  spawnTimeDiamante: 10
+  spawnTimeObsidiana: 3.5
+  spawnTimeLava: 10
 --- !u!1001 &35867629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9655,7 +9678,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1653875289}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56c300af24c06ad418c621573c9f7024, type: 3}
   m_Name: 
