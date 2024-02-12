@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RandonSpawn : MonoBehaviour
 {
+
     [SerializeField]
     private GameObject roca;
     [SerializeField]
@@ -13,28 +14,29 @@ public class RandonSpawn : MonoBehaviour
     [SerializeField]
     private GameObject lava;
 
+
     [SerializeField]
-    private float spawnTimeRoca = 3.5f;
+    private float spawnTimeRoca;
     [SerializeField]
-    private float spawnTimeDiamante = 10f;
+    private float spawnTimeDiamante;
     [SerializeField]
-    private float spawnTimeObsidiana = 3.5f;
+    private float spawnTimeObsidiana;
     [SerializeField]
-    private float spawnTimeLava = 10f;
+    private float spawnTimeLava;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(spawnEnemy(spawnTimeRoca, roca));
         StartCoroutine(spawnEnemy(spawnTimeDiamante, diamante));
-        StartCoroutine(spawnEnemy(spawnTimeRoca, obsidiana));
-        StartCoroutine(spawnEnemy(spawnTimeDiamante, lava));
+        StartCoroutine(spawnEnemy(spawnTimeObsidiana, obsidiana));
+        StartCoroutine(spawnEnemy(spawnTimeLava, lava));
     }
 
     private IEnumerator spawnEnemy(float interval, GameObject minerales)
     {
         yield return new WaitForSeconds(interval);
-        GameObject newMineral = Instantiate(minerales, new Vector3(Random.Range(-5f, 5), Random.Range(-6f, 6f), 0), Quaternion.identity);
+        GameObject newMineral = Instantiate(minerales, new Vector3(Random.Range(-8f, 7), Random.Range(-7f, 7f), 0), Quaternion.identity);
         StartCoroutine(spawnEnemy(interval, minerales));
     }
 }
