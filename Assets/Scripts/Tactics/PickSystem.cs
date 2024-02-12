@@ -59,12 +59,25 @@ public class PickSystem : MonoBehaviour
 
             Destroy(collision.gameObject);
         }
+        else if (collision.gameObject.CompareTag("Hazard"))
+        {
+            Damage();
+            Destroy(collision.gameObject);
+        }
     }
 
     private void LevelUp()
     {
         curLevel++;
         OnlevelUp.Invoke();
+    }
+
+    private void Damage()
+    {
+        if (curLevel > 0)
+        {
+            print("Upgrade lost! Current level: " + --curLevel);
+        }
     }
 
     private void IncreaseExperience(int exp)
