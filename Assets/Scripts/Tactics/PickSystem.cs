@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class PickSystem : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PickSystem : MonoBehaviour
     [Space(), Header("Status")]
     [SerializeField] int curLevel = 0;
     [SerializeField] int experience = 0;
+    [SerializeField]
+    TextMeshProUGUI txtScore;
 
     public event Action OnlevelUp;
 
@@ -25,6 +28,7 @@ public class PickSystem : MonoBehaviour
     private void Start()
     {
         OnlevelUp += () => print("Leveled to " + curLevel);
+        txtScore.text = txtScore.text + "0";
     }
 
     private void Update()
@@ -69,6 +73,7 @@ public class PickSystem : MonoBehaviour
     private void LevelUp()
     {
         curLevel++;
+        UpdateScore();
         OnlevelUp.Invoke();
     }
 
@@ -77,6 +82,7 @@ public class PickSystem : MonoBehaviour
         if (curLevel > 0)
         {
             print("Upgrade lost! Current level: " + --curLevel);
+            UpdateScore();
         }
     }
 
@@ -93,5 +99,11 @@ public class PickSystem : MonoBehaviour
         {
             experience = newExp;
         }
+    }
+
+    private void UpdateScore()
+    {
+        var txt = txtScore.text.Substring(0, 7);
+        txtScore.text = txt + curLevel;
     }
 }
