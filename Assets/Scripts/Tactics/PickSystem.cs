@@ -14,6 +14,8 @@ public class PickSystem : MonoBehaviour
     [SerializeField] int experience = 0;
     [SerializeField]
     TextMeshProUGUI txtScore;
+    [SerializeField]
+    TextMeshProUGUI txtExp;
 
     public event Action OnlevelUp;
 
@@ -29,6 +31,7 @@ public class PickSystem : MonoBehaviour
     {
         OnlevelUp += () => print("Leveled to " + curLevel);
         txtScore.text = txtScore.text + "0";
+        txtExp.text = "Exp: " + experience.ToString();
     }
 
     private void Update()
@@ -90,7 +93,7 @@ public class PickSystem : MonoBehaviour
     {
         var newExp = exp + experience;
 
-        if (newExp > MaxExperience)
+        if (newExp >= MaxExperience)
         {
             LevelUp();
             experience = newExp - MaxExperience;
@@ -99,6 +102,7 @@ public class PickSystem : MonoBehaviour
         {
             experience = newExp;
         }
+        txtExp.text = "Exp: " + experience.ToString();
     }
 
     private void UpdateScore()
