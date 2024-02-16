@@ -4,18 +4,21 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PickSystem : MonoBehaviour
 {
     [Header("Settings"), Space()]
     [SerializeField] int maxExperience = 1000;
     [Space(), Header("Status")]
-    [SerializeField] int curLevel = 0;
-    [SerializeField] int experience = 0;
+    [SerializeField] float curLevel = 0;
+    [SerializeField] float experience = 0;
     [SerializeField]
     TextMeshProUGUI txtScore;
     [SerializeField]
     TextMeshProUGUI txtExp;
+    [SerializeField]
+    Image expBar;
 
     public event Action OnlevelUp;
 
@@ -31,7 +34,8 @@ public class PickSystem : MonoBehaviour
     {
         OnlevelUp += () => print("Leveled to " + curLevel);
         txtScore.text = txtScore.text + "0";
-        txtExp.text = "Exp: " + experience.ToString();
+        //txtExp.text = "Exp: " + experience.ToString();
+        expBar.fillAmount = 0;
     }
 
     private void Update()
@@ -102,7 +106,9 @@ public class PickSystem : MonoBehaviour
         {
             experience = newExp;
         }
-        txtExp.text = "Exp: " + experience.ToString();
+
+        expBar.fillAmount = experience / maxExperience;
+        //txtExp.text = "Exp: " + experience.ToString();
     }
 
     private void UpdateScore()
