@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MenuTactico.unity
+    guid: 12dc51380aed2b149a27e055462cc574
+  - enabled: 1
     path: Assets/Scenes/RRouxTactico.unity
     guid: 26e8e7e009fa3eb4ebdab75d12edc084
   m_configObjects: {}
