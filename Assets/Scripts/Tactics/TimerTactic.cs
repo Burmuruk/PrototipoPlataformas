@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class TimerTactic : MonoBehaviour
@@ -13,6 +14,13 @@ public class TimerTactic : MonoBehaviour
     TextMeshProUGUI txtEnd;
     [SerializeField]
     TextMeshProUGUI txtTimer;
+    [SerializeField]
+    TextMeshProUGUI txtLevel;
+    [SerializeField]
+    TextMeshProUGUI txtScore;
+
+    public UnityEvent OnTimeFinished;
+    public UnityEvent OnGameRestarted;
 
     void Start()
     {
@@ -44,6 +52,10 @@ public class TimerTactic : MonoBehaviour
         timeFinished = true;
         txtEnd.gameObject.SetActive(true);
         Time.timeScale = 0;
+        OnTimeFinished?.Invoke();
+        var pickSystem = FindObjectOfType<PickSystem>();
+        txtLevel.text = pickSystem.Level.ToString();
+        txtScore.text = pickSystem.Experience.ToString();
     }
 
     private void Update()
@@ -59,5 +71,6 @@ public class TimerTactic : MonoBehaviour
         SceneManager.LoadScene(gameObject.scene.buildIndex);
         Time.timeScale = 1;
         txtEnd.gameObject.SetActive(false);
+        OnGameRestarted?.Invoke();
     }
 }

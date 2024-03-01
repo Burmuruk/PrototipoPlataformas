@@ -30,6 +30,9 @@ public class PickSystem : MonoBehaviour
         }
     }
 
+    public float Level { get => curLevel; }
+    public float Experience { get => experience; }
+
     private void Start()
     {
         OnlevelUp += () => print("Leveled to " + curLevel);
