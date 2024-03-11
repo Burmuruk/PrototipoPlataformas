@@ -48,7 +48,7 @@ public class MenuPause : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
         //ScoreManager.scoreCount = 0;
     }
 
